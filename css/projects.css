@@ -1,0 +1,54 @@
+
+
+h2 {
+    text-align: left; 
+    padding-left: 4em; 
+}
+
+p {
+    text-align: left; 
+    padding-left: 6em; 
+    padding-right: 14em;
+}
+
+pre {
+    background-color: #e9e7e2; 
+    color: #f8f8f2; 
+    padding: 15px;
+    border-radius: 5px;
+    white-space: pre-wrap;
+    word-wrap: break-word;
+    font-family: 'Courier New', monospace; 
+    font-size: 1rem; 
+    overflow-x: auto; /* Allow horizontal scrolling if the line is too long */
+}
+
+code {
+    color: #18049a; 
+    background-color: #e9e7e2; 
+    font-family: 'Verdana', monospace; /* Monospaced font for inline code */
+}
+
+details {
+    margin-top: 10px;
+}
+
+summary {
+    cursor: pointer;
+    padding-left: 6em; 
+    font-weight: bold;
+    color: #036b66;
+}
+
+.styled-link {
+    color: inherit; 
+    text-decoration: none; 
+  }
+
+  .styled-link:visited {
+    color: inherit; /* Prevent purple color after clicking */
+  }
+
+  .styled-link:hover {
+    text-decoration: underline; /* Add underline on hover */
+  }

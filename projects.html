@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bajtek's Projects</title>
+    <link rel="stylesheet" href="css/header.css">
+    <link rel="stylesheet" href="css/projects.css">
+</head>
+<body>
+    <header>
+        <nav>
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="projects.html">Projekty</a></li>
+                <li><a href="interests.html">Zainteresowania</a></li>
+                <li><a href="plan.html">Plan</a></li>
+            </ul>
+        </nav>
+    </header>
+    <main class="content">
+        <section>
+            <h2>Projekt 1: <a href="https://github.com/BajtekRogue/GO" class="styled-link">Gra GO</a></h2>
+            <p>Aplikacja do gry w starożytną chińską gre GO. Napisana w 100% w języku Java. Umożliwa granie na 2 graczy, z botem, zapisywanie oraz wczytwanie gier do bazy danych. Najciekawszą częścią projektu jest własnoręcznie napisany bot, który próbuje otaczać kamienie przeciwnika w inteligentny sposób.</p>
+            <details>
+                <summary>Kod bota</summary>
+                <pre><code>
+                    public Coordinates makeMove() {
+                        if (consecativeTriesCounter == boardSize * boardSize) {
+                            resetVisited();
+                            hasTarget = false;
+                            target = null;
+                            return CoordinatesFactory.createCoordinates(-1, -1);
+                        }
+                        if (hasTarget && BoardManager.isTileFree(target.getX(), target.getY())) {
+                            return resetAlgorithm();
+                        }
+                        if (!hasTarget || didTargetRepeat(target)) {
+                            return resetAlgorithm();
+                        }
+                
+                        System.out.println("TARGET: (" + target.getX() + " , " + target.getY() + ")");
+                        StoneNeighbours targetNeighbours = NeighbourManager.getArrayOfNeighbours().getNeighbours(target.getX(),
+                                target.getY());
+                
+                        if (targetNeighbours.getNorth() == NeighbourState.EMPTY && !visited[target.getX()][target.getY() + 1]) {
+                            visited[target.getX()][target.getY() + 1] = true;
+                            return CoordinatesFactory.createCoordinates(target.getX(), target.getY() + 1);
+                        } else if (targetNeighbours.getEast() == NeighbourState.EMPTY && !visited[target.getX() + 1][target.getY()]) {
+                            visited[target.getX() + 1][target.getY()] = true;
+                            return CoordinatesFactory.createCoordinates(target.getX() + 1, target.getY());
+                        } else if (targetNeighbours.getSouth() == NeighbourState.EMPTY && !visited[target.getX()][target.getY() - 1]) {
+                            visited[target.getX()][target.getY() - 1] = true;
+                            return CoordinatesFactory.createCoordinates(target.getX(), target.getY() - 1);
+                        } else if (targetNeighbours.getWest() == NeighbourState.EMPTY && !visited[target.getX() - 1][target.getY()]) {
+                            visited[target.getX() - 1][target.getY()] = true;
+                            return CoordinatesFactory.createCoordinates(target.getX() - 1, target.getY());
+                        }
+                
+                        if (targetNeighbours.getNorth() == NeighbourState.ALLY && !visited[target.getX()][target.getY() + 1]) {
+                            visited[target.getX()][target.getY() + 1] = true;
+                            target = CoordinatesFactory.createCoordinates(target.getX(), target.getY() + 1);
+                            historyOfTargets.add(CoordinatesFactory.createCoordinates(target.getX(), target.getY() + 1));
+                            return makeMove();
+                        } else if (targetNeighbours.getEast() == NeighbourState.ALLY && !visited[target.getX() + 1][target.getY()]) {
+                            visited[target.getX() + 1][target.getY()] = true;
+                            target = CoordinatesFactory.createCoordinates(target.getX() + 1, target.getY());
+                            historyOfTargets.add(CoordinatesFactory.createCoordinates(target.getX() + 1, target.getY()));
+                            return makeMove();
+                        } else if (targetNeighbours.getSouth() == NeighbourState.ALLY && !visited[target.getX()][target.getY() - 1]) {
+                            visited[target.getX()][target.getY() - 1] = true;
+                            target = CoordinatesFactory.createCoordinates(target.getX(), target.getY() - 1);
+                            historyOfTargets.add(CoordinatesFactory.createCoordinates(target.getX(), target.getY() - 1));
+                            return makeMove();
+                        } else if (targetNeighbours.getWest() == NeighbourState.ALLY && !visited[target.getX() - 1][target.getY()]) {
+                            visited[target.getX() - 1][target.getY()] = true;
+                            target = CoordinatesFactory.createCoordinates(target.getX() - 1, target.getY());
+                            historyOfTargets.add(CoordinatesFactory.createCoordinates(target.getX() - 1, target.getY()));
+                            return makeMove();
+                        }
+                
+                        return resetAlgorithm();
+                    }
+                </code></pre>
+            </details>
+        </section>
+        
+        <section>
+            <h2>Projekt 2: <a href="https://github.com/BajtekRogue/Gelang-Compiler" class="styled-link">Kompilator</a></h2>
+            <p>Kompilator prostego języka imperatywnego <i>Gelang</i> na cutomową maszynę wirtualną. Projekt był realizowany w ramach kursu <strong> Języki Formalne i Techniki Translacji 2024/2025</strong>. Kompilator został napisany w C++ przy urzyciu Flexa oraz Bisona do analizy leksykalnej oraz składniowej.</p>
+            <details>
+                <summary>Fragment kompilatora</summary>
+                <pre><code>
+                    std::vector&lt;AssemblyInstruction&gt; compileCommand(SymbolsTable& symbolsTable, std::unique_ptr&lt;Command&gt;& cmd) {
+
+                        switch (cmd-&gt;type) {
+                            case CommandType::Read: {
+                                return compileRead(symbolsTable, std::move(std::unique_ptr&lt;ReadCommand&gt;(dynamic_cast&lt;ReadCommand*&gt;(cmd.release()))));
+                                break;
+                            }
+                            case CommandType::Write: {
+                                return compileWrite(symbolsTable, std::move(std::unique_ptr&lt;WriteCommand&gt;(dynamic_cast&lt;WriteCommand*&gt;(cmd.release()))));
+                                break;
+                            }
+                            case CommandType::Assign: {
+                                return compileAssign(symbolsTable, std::move(std::unique_ptr&lt;AssignCommand&gt;(dynamic_cast&lt;AssignCommand*&gt;(cmd.release()))));
+                                break;
+                            }
+                            case CommandType::If:{
+                                return compileIf(symbolsTable, std::move(std::unique_ptr&lt;IfCommand&gt;(dynamic_cast&lt;IfCommand*&gt;(cmd.release()))));
+                                break;
+                            }
+                            case CommandType::IfElse:{
+                                return compileIfElse(symbolsTable, std::move(std::unique_ptr&lt;IfElseCommand&gt;(dynamic_cast&lt;IfElseCommand*&gt;(cmd.release()))));
+                                break;
+                            }
+                            case CommandType::While:{
+                                return compileWhile(symbolsTable, std::move(std::unique_ptr&lt;WhileCommand&gt;(dynamic_cast&lt;WhileCommand*&gt;(cmd.release()))));
+                                break;
+                            }
+                            case CommandType::Repeat:{
+                                return compileRepeat(symbolsTable, std::move(std::unique_ptr&lt;RepeatCommand&gt;(dynamic_cast&lt;RepeatCommand*&gt;(cmd.release()))));
+                                break;
+                            }
+                            case CommandType::ForTo:{
+                                return compileForTo(symbolsTable, std::move(std::unique_ptr&lt;ForToCommand&gt;(dynamic_cast&lt;ForToCommand*&gt;(cmd.release()))));
+                                break;
+                            }
+                            case CommandType::ForDownto:{
+                                return compileForDownto(symbolsTable, std::move(std::unique_ptr&lt;ForDowntoCommand&gt;(dynamic_cast&lt;ForDowntoCommand*&gt;(cmd.release()))));
+                                break;
+                            }
+                            case CommandType::ProcedureCall:{
+                                return compileProcedureCall(symbolsTable, std::move(std::unique_ptr&lt;ProcedureCallCommand&gt;(dynamic_cast&lt;ProcedureCallCommand*&gt;(cmd.release()))));
+                                break;
+                            }
+                            default:
+                                throw std::runtime_error("Non-implemented command type");
+                        }
+                    }
+                </code></pre>
+            </details>
+        </section>
+        
+        <section>
+            <h2>Projekt 3: <a href="https://github.com/BajtekRogue/Groebner-Basis" class="styled-link">Kalkulator baz Gröbnera</a></h2>
+            <p> Kalkulator do obliczania baz Gröbnera w pierścieniach wielomianów wielu zmiennych przy pomocy algorytmu Buchenberga. Dostępna jest wersja a Pythonie oraz C++. Projekt umożliwia standadrowe operacje wielomianowe. Algorytmy zaczerpnięte są z książki <em>Cox, D., Little, J., & OShea, D. Ideals, varieties, and algorithms: an introduction to computational algebraic geometry and commutative algebra</em>.</p>
+            <details>
+                <summary>Algorytmu Buchenberga</summary>
+                <pre><code>
+                    template &lt;typename T&gt;
+                        std::vector&lt;Polynomial&lt;T&gt;&gt; extendToGroebnerBasis(const std::vector&lt;Polynomial&lt;T&gt;&gt;& F, const MonomialOrder& order) {
+                        
+                            std::vector&lt;Polynomial&lt;T&gt;&gt; G = F;
+                        
+                            while (true) {
+                        
+                                const int n = G.size();
+                                std::vector&lt;Polynomial&lt;T&gt;&gt; H = G;
+                                bool somethingAdded = false;
+                        
+                                for (int i = 0; i &lt; n; i++) {
+                                    for (int j = i + 1; j &lt; n; j++) {
+                        
+                                        const Monomial& i_monomial = G[i].leadingMonomial(order);
+                                        const Monomial& j_monomial = G[j].leadingMonomial(order);
+                        
+                                        if (lcmCriterion(i_monomial, j_monomial)) {
+                                            continue;
+                                        }
+                        
+                                        std::vector&lt;Monomial&gt; remainingMonomials(n - (j + 1));
+                                        for (int k = j + 1; k &lt; n; k++) {
+                                            remainingMonomials[k - (j + 1)] = G[k].leadingMonomial(order);
+                                        }
+                        
+                                        if (chainCriterion(i_monomial, j_monomial, remainingMonomials)) {
+                                            continue;
+                                        }
+                        
+                                        Polynomial&lt;T&gt; s = syzygy(G[i], G[j], order);
+                                        auto [_, r] = polynomialReduce(s, G, order);
+                        
+                                        if (!r.isZeroPolynomial()) {
+                                            H.push_back(r);
+                                            somethingAdded = true;
+                                        }
+                        
+                                    }
+                                }
+                        
+                                if (!somethingAdded) {
+                                    return H;
+                                }
+                                else {
+                                    G = H;
+                                }
+                            }
+                        }
+                </code></pre>
+            </details>
+        </section>
+    </main>
+    <footer>
+        <p>&copy; 2025 Bartek Łabuz. All rights reserved.</p>
+    </footer>
+</body>
+</html>
