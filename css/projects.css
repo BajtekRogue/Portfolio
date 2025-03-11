@@ -1,26 +1,33 @@
 
-
 h2 {
-    text-align: left; 
-    padding-left: 4em; 
+    text-align: left;
+    padding-left: 0.5em;  
+    padding-right: 1em;
+} 
+
+summary {
+    text-align: left;
+    padding-left: 1em;  
+    padding-right: 1em;
 }
 
 p {
-    text-align: left; 
-    padding-left: 6em; 
-    padding-right: 14em;
+    text-align: left;
+    padding-left: 0.8em;  
+    padding-right: 1em;
+    max-width: 100%; 
 }
 
 pre {
-    background-color: #e9e7e2; 
-    color: #f8f8f2; 
-    padding: 15px;
-    border-radius: 5px;
-    white-space: pre-wrap;
-    word-wrap: break-word;
-    font-family: 'Courier New', monospace; 
-    font-size: 1rem; 
-    overflow-x: auto; /* Allow horizontal scrolling if the line is too long */
+    background-color: #e9e7e2;  
+    color: #f8f8f2;  
+    padding: 15px;  
+    border-radius: 5px;  
+    white-space: pre-wrap;  
+    word-wrap: break-word;  
+    font-family: 'Courier New', monospace;  
+    font-size: 1rem;  
+    overflow-x: auto;  
 }
 
 code {
@@ -35,7 +42,7 @@ details {
 
 summary {
     cursor: pointer;
-    padding-left: 6em; 
+    padding-left: 1em; 
     font-weight: bold;
     color: #036b66;
 }
@@ -43,12 +50,37 @@ summary {
 .styled-link {
     color: inherit; 
     text-decoration: none; 
-  }
+}
 
-  .styled-link:visited {
+.styled-link:visited {
     color: inherit; /* Prevent purple color after clicking */
-  }
+}
 
-  .styled-link:hover {
+.styled-link:hover {
     text-decoration: underline; /* Add underline on hover */
-  }
+}
+
+footer, footer p, footer div {
+    text-align: center !important;
+    color: white;
+}
+  
+footer {
+    background-color: #036b66;
+    padding: 1em;
+    margin-top: 2em;
+    box-sizing: border-box;
+}
+
+/* Large screens */
+@media (min-width: 1024px) {
+
+    footer {
+        background-color: #036b66;
+        color: white;
+        text-align: center;
+        padding: 1em;
+        margin-top: auto;
+        box-sizing: border-box;
+    }
+}

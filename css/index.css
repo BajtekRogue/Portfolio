@@ -1,45 +1,96 @@
 
-
 .container {
-    display: flex;
-    flex: 1;
-    width: 100%; 
-    box-sizing: border-box;
+  display: flex;
+  flex-direction: column; 
+  width: 100%;
+  min-height: 77vh;
+  box-sizing: border-box;
 }
 
 .sidebar {
-    width: 30%;
-    background-color: #036b66;
-    color: white;
-    text-align: center;
-    padding: 2em;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    box-sizing: border-box; 
+  width: 100%; 
+  background-color: #036b66;
+  color: white;
+  text-align: center;
+  padding: 2em;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  box-sizing: border-box;
 }
 
 .sidebar img {
-    width: 80%;
-    border-radius: 50px;
-    box-sizing: border-box;
+  width: 60%; 
+  border-radius: 50%;
+  box-sizing: border-box;
 }
 
 .content {
-    width: 80%;
-    padding: 4em;
+  width: 80%;
+  padding: 2em;
+  word-wrap: break-word;
+  flex-grow: 1;
 }
 
 .styled-link {
-    color: inherit; 
-    text-decoration: none; 
+  color: inherit; 
+  text-decoration: none; 
+}
+
+.styled-link:visited {
+  color: inherit; /* Prevent purple color after clicking */
+}
+
+.styled-link:hover {
+  text-decoration: underline; /* Add underline on hover */
+}
+
+/* Medium screens */
+@media (min-width: 600px) { 
+  .container {
+      flex-direction: row; 
   }
 
-  .styled-link:visited {
-    color: inherit; /* Prevent purple color after clicking */
+  .sidebar {
+      width: 40%; /* Sidebar on the left */
+      padding: 2em;
+      flex-direction: column; 
+      align-items: center;
   }
 
-  .styled-link:hover {
-    text-decoration: underline; /* Add underline on hover */
+  .sidebar img {
+      width: 80%;
+      border-radius: 50px;
+      box-sizing: border-box;
   }
 
+  .content {
+      width: 80%; 
+      padding: 4em;
+  }
+}
+
+/* Large screens */
+@media (min-width: 1024px) { 
+  .container {
+      flex-direction: row; 
+  }
+
+  .sidebar {
+      width: 30%; 
+      padding: 3em;
+      flex-direction: column; 
+      align-items: center;
+  }
+
+  .sidebar img {
+      width: 80%;
+      border-radius: 50px;
+      box-sizing: border-box;
+  }
+
+  .content {
+      width: 70%; 
+      padding: 4em;
+  }
+}

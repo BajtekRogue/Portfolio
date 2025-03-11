@@ -13,11 +13,33 @@ h1 {
     align-items: center;
 }
 
+.schedule-container {
+    width: 100%;
+    overflow-x: auto; /* Enable horizontal scrolling */
+    -webkit-overflow-scrolling: touch; /* Smooth scrolling on iOS */
+    text-align: center;
+}
 
 .schedule-img {
     display: block;
-    max-width: 80%;
+    width: auto; 
+    max-width: none; 
     height: auto;
-    margin: 0 auto;
 }
 
+/* Medium screens */
+@media (min-width: 600px) {
+    .schedule-img {
+        display: block;
+        max-width: 80%;
+        height: auto;
+        margin: 0 auto;
+    }
+}
+
+/* Large screens */
+@media (min-width: 1024px) {
+    .schedule-img {
+        max-width: 60%;
+    }
+}
