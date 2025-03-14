@@ -15,7 +15,6 @@ h1 {
 
 .schedule-container {
     width: 100%;
-    overflow-x: auto; /* Enable horizontal scrolling */
     -webkit-overflow-scrolling: touch; /* Smooth scrolling on iOS */
     text-align: center;
 }
@@ -23,7 +22,7 @@ h1 {
 .schedule-img {
     display: block;
     width: auto; 
-    max-width: none; 
+    max-width: 100%; 
     height: auto;
 }
 

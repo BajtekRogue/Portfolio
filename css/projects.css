@@ -65,22 +65,3 @@ footer, footer p, footer div {
     color: white;
 }
   
-footer {
-    background-color: #036b66;
-    padding: 1em;
-    margin-top: 2em;
-    box-sizing: border-box;
-}
-
-/* Large screens */
-@media (min-width: 1024px) {
-
-    footer {
-        background-color: #036b66;
-        color: white;
-        text-align: center;
-        padding: 1em;
-        margin-top: auto;
-        box-sizing: border-box;
-    }
-}
